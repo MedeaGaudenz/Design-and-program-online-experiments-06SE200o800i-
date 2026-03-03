@@ -13,6 +13,19 @@ Go to Source Control
 
 Click the Sync button to pull the latest changes
 
+#### 1.1  sync/merge your fork with new changes from original repo
+
+In VS code terminal, type the following:
+
+git remote add upstream https://github.com/J2K101000101/Design-and-program-online-experiments-06SE200o800i-.git
+
+git fetch upstream
+
+git checkout main
+
+git merge upstream/main
+
+git push origin main
 
 ### 2. Never Edit the STARTER Files Directly
 
