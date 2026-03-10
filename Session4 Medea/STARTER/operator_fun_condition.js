@@ -50,7 +50,7 @@ function newFunction(a,b) {
     return { a, b, c};
 }
 let myResults = newFunction(1, 3);
-console.log("my results:", myResults); // 4
+console.log("my results:", myResults); // ?
 
 /* 4.2.5: Verify your answers by running the JavaScript script in operator.html. Open the browser's developer console and check the logged output. Compare the results with the expected answers from the previous steps. */
 
