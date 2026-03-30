@@ -12,7 +12,7 @@ const trials = [
         
  /* exercise 6.2.1 */
  
-// You goal is to calculate the overal accuracy (0-1).
+// You goal is to calculate the overal accucary (0-1).
 
 // An example of using filter()
 
@@ -30,6 +30,7 @@ const trials = [
 
 let correctCount = 0;
 // start add your code here
+correctTrials = trials.forEach((t)=> {if(t.correct) {correctCount ++;}})
 
 // your code end
 console.log("Correct answers:", correctCount);
