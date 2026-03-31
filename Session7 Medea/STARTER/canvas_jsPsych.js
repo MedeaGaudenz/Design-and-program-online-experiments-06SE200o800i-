@@ -9,7 +9,10 @@
 
 //step 2:  initiate jsPsych
 
+const jsPsych = initJsPsych();
+
 // step 3: building timeline 
+const timeline = []
 
 // instruction 
 const instruction = {
@@ -23,11 +26,12 @@ timeline.push(instruction);
 
 // 7.2.2 make the trial_duration randomly selected from 1s, 2s or 3s
 // fixation 
+
 const fixation = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: "+",
     choices: "NO_KEYS",
-    trial_duration: 1000
+    trial_duration: jsPsych.randomization.sampleWithoutReplacement([1000,2000,3000],1)[0]
 }
 timeline.push(fixation);
 
@@ -98,13 +102,13 @@ const drawBunnyfn = function (canvas){
 
 const end = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "<h2>👍<h2>",
+    stimulus: "<h2>👍</h2>",
     choices: "NO_KEYS",
     trial_duration: 1000
 }
 timeline.push(end)
 
 // step 4: run the timline
-
+jsPsych.run(timeline);
 
 
