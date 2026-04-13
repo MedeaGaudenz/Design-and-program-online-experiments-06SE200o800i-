@@ -36,7 +36,7 @@ const fixation = {
 timeline.push(fixation);
 
 
-const drawBunnyfn = function (canvas){
+const drawBunnyfn = function(canvas){
     
     const context = canvas.getContext("2d");
    
@@ -49,9 +49,9 @@ const drawBunnyfn = function (canvas){
        context.clearRect(0, 0, canvas.width, canvas.height);
    
        // COLORS
-       const fur = "#F2F2F2";
+       const fur = "#dd09f9";
        const stroke = "#B0B0B0";
-       const blush = "#F8C8DC";
+       const blush = "#f7ef06";
        const nose = "#E89CA9";
      
        // EARS (Left & Right)
@@ -99,6 +99,14 @@ const drawBunnyfn = function (canvas){
 
 }
 
+const BunnyTrial = {
+            type: jsPsychCanvasKeyboardResponse,
+            canvas_size: [window.innerHeight, window.innerWidth],
+            stimulus: drawBunnyfn, //siehe oben
+            choices: "g",
+            trial_duration: 7000}
+
+timeline.push(BunnyTrial)
 
 const end = {
     type: jsPsychHtmlKeyboardResponse,
@@ -107,6 +115,51 @@ const end = {
     trial_duration: 1000
 }
 timeline.push(end)
+
+function drawSmiley(canvas){
+            const ctx = canvas.getContext("2d");
+            console.dir(ctx);
+            ctx.beginPath();
+            ctx.arc(100,100,50,0,2*Math.PI);
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.stroke();
+            ctx.closePath();
+            
+            ctx.beginPath();
+            ctx.arc(80,80,5,0,2*Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(120,80,5,0,2*Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.arc(100,120,12,false, Math.PI);
+            ctx.fillStyle = "black";
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        const SmileyTrial = {
+            type: jsPsychCanvasKeyboardResponse,
+            canvas_size: [window.innerHeight, window.innerWidth],
+            stimulus: drawSmiley, //siehe oben
+            choices: "1",
+            trial_duration: 7000}
+
+timeline.push(SmileyTrial)
 
 // step 4: run the timline
 jsPsych.run(timeline);

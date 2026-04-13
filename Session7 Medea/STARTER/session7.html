@@ -16,12 +16,12 @@
 <body>
         // Step 1: add script for experiment
         // Step 2: initiate (call) jsPsych instance and assign to a variable 
-        // Step 3:  build your timeline
+        // Step 3:  build your timeline (empty in the beginning)
         // Step 4: run your jsPsych
 
         <script>
          const jsPsych = initJsPsych();
-         const timeline = []
+         const timeline = [] //timeline is empty here
 
          const fixation = {
             type: jsPsychHtmlKeyboardResponse,
@@ -35,20 +35,64 @@
             const ctx = canvas.getContext("2d");
             console.dir(ctx);
             ctx.fillStyle="pink";
-            ctx.fillRect(500, 500, 100, 50)
+            ctx.fillRect(500, 500, 100, 50) // filled Rectangle
             ctx.strokeStyle="red";
-            ctx.strokeRect(500, 500, 100, 50);
-            ctx.clearRect(500, 500, 10, 10)
+            ctx.strokeRect(500, 500, 100, 50); // Rectangle outline
+            ctx.clearRect(500, 500, 10, 10) // clears an Rectangle area
         }
 
         const canvasTrial = {
             type: jsPsychCanvasKeyboardResponse,
             canvas_size: [window.innerHeight, window.innerWidth],
-            stimulus: drawFn,
+            stimulus: drawFn, //siehe oben
             choices: "9",
             trial_duration: 5000}
         
         timeline.push(canvasTrial);
+
+        function drawShapes(canvas){
+            const ctx = canvas.getContext("2d");
+            console.dir(ctx);
+            ctx.beginPath();
+            ctx.moveTo(150,50);
+            ctx.lineTo(100,150);
+            ctx.lineTo(200,150);
+            ctx.closePath();
+            ctx.fillStyle="lightgreen";
+            ctx.fill();
+            ctx.strokeStyle="black";
+            ctx.stroke();
+        }
+
+        const canvasTrial2 = {
+            type: jsPsychCanvasKeyboardResponse,
+            canvas_size: [window.innerHeight, window.innerWidth],
+            stimulus: drawShapes, //siehe oben
+            choices: "5",
+            trial_duration: 7000}
+        
+        timeline.push(canvasTrial2);
+
+        function drawShapes2(canvas){
+            const ctx = canvas.getContext("2d");
+            console.dir(ctx);
+            ctx.beginPath();
+            ctx.arc(100,100,50,0,2*Math.PI);
+            ctx.fillStyle = "lightblue";
+            ctx.fill();
+            ctx.cstrokeStyle="blue";
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        const canvasTrial3 = {
+            type: jsPsychCanvasKeyboardResponse,
+            canvas_size: [window.innerHeight, window.innerWidth],
+            stimulus: drawShapes2, //siehe oben
+            choices: "3",
+            trial_duration: 7000}
+        
+        timeline.push(canvasTrial3);
 
          jsPsych.run(timeline);
         </script>
