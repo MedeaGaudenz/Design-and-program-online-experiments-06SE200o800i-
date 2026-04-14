@@ -25,7 +25,17 @@
   <script>
 
     /* initialize jsPsych */
-    const jsPsych = initJsPsych();
+    const jsPsych = initJsPsych({
+      on_finish: () => {
+      jsPsych.data.get().localSave('csv','verbal_fluency_data.csv');}
+      });
+
+
+    //Daten speichern (global)
+  jsPsych.data.addProperties ({
+  participant_id: 'P001',
+  session: 1
+  });
 
     /* create timeline */
     const timeline = [];
@@ -42,7 +52,7 @@
       };
     timeline.push(microphoneInit);
 
-   /* add instruction the timeline */
+   /* add instruction in the timeline */
     const instruction = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
@@ -52,17 +62,41 @@
         can say any kind of word you want, except for proper nouns (like Bob or Boston), numbers <br><br>
         The recording will stop after one minute.  <br><br> Are you ready?.</p>
       `,
+      on_finish: (data) => {
+      data.speed_label = data.rt < 300 ? 'fast' : 'slow'; //Daten bereits analysiert abspeichern (Trial-Level)
+      },
+      data:{phase:'instruction'},
       choices: ['Yes,I am ready!']
     }
     timeline.push(instruction);
 
     /* exercise 8.1:  add recording for 1 min the timeline */
+    const record = {
+      type: jsPsychHtmlAudioResponse,
+      stimulus: <p style="font-size:48px; color:red;">Name maximum Number of words in 1 minute that begin with the letter F</p>,
+      recording_duration: 60000,
+      allow_playback: true,
+      data:{
+        phase: "fluency",
+        condition: "F"
+      }
+    }
 
-
-
-
-    
     timeline.push(record);
+
+    const endMessage = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: () => {
+    const allData = jsPsych.data.get(); // Access and summarize data (Trial level)
+    console.log("allData", allData)
+    const nSlow = allData.filter({ speed_label: 'slow' }).count();
+    return nSlow >0? "too slow!": "Thank you!";
+    },
+    choices: ['Finish'],
+    data: { phase: 'end' }
+    }; 
+
+    timeline.push(endMessage);
 
     /* start the experiment */
     jsPsych.run(timeline);
