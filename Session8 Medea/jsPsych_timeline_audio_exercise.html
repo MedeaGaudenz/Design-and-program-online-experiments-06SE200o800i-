@@ -60,13 +60,11 @@
         <p>Tell me as many words as you
         can think of that begin with a certain letter of the alphabet that I will tell you in a moment. <br><br> You
         can say any kind of word you want, except for proper nouns (like Bob or Boston), numbers <br><br>
-        The recording will stop after one minute.  <br><br> Are you ready?.</p>
-      `,
+        The recording will stop after one minute.  <br><br> Are you ready?.</p>`,
+      choices: ['Yes,I am ready!'],
       on_finish: (data) => {
-      data.speed_label = data.rt < 300 ? 'fast' : 'slow'; //Daten bereits analysiert abspeichern (Trial-Level)
-      },
-      data:{phase:'instruction'},
-      choices: ['Yes,I am ready!']
+      data.speed_label = data.rt < 300 ? 'fast' : 'slow';}, //Daten bereits analysiert abspeichern (Trial-Level)
+      data:{phase:'instruction'}
     }
     timeline.push(instruction);
 

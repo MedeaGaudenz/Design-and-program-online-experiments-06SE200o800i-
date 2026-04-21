@@ -15,14 +15,18 @@
     <h2 id="welcome"> Welcome </h2>
     <script>
 
-      // //starting example
-      // const myHeadingContent = "Hello, DOM!"; 
-      // const heading = document.getElementsByTagName("h1")[0]; // there can be possible multiple h1, therefore, you need to access a specific element. 
-      // heading.textContent += ": ";
-      // heading.textContent += myHeadingContent;
+      //starting example
+    //   const myHeadingContent = "Hello, DOM!"; 
+    //   const heading = document.getElementsByTagName("h1")[0]; // there can be possible multiple h1, therefore, you need to access a specific element. 
+    //   heading.textContent += ": ";
+    //   heading.textContent += myHeadingContent;
 
       /* 9.1.2 */
       // use getElementById() & . textContent to achieve the same goal as in the starting example
+
+      document.getElementbyId("my-heading").textContent += ": Hello, DOM!"
+      document.getElementbyId("welcome").textContent += "Medea";
+
 
       
     </script>
@@ -47,7 +51,7 @@
                 const interval = setInterval(() => {
                     if (count > 1) {
                         count--;
-                        display.innerHTML = `<h1 style="color: red;">${count}</h1>`;
+                        display.innerHTML = `<h1 style="color: red;">${count}</h1>`; // vordefinieren wie h1 aussehen soll (?)
                     } else {
                         clearInterval(interval);
                         display.innerHTML = '<h1 style="color: red;">Go!</h1>';

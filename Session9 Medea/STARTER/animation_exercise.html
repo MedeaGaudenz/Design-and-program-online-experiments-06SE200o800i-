@@ -36,12 +36,20 @@
                 let animationId = null;
 
                 // 9.2.1 draw a blue circle
-                function drawBall() {
-                    // TODO: 
+                // TODO: 
                     // 1. clear canvas use ctx.clearRect(0, 0, canvas.width, canvas.height)
                     // 2. draw a blue circle at (x, y) with given radius
-                    
-                 
+            
+                function drawBall() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                    ctx.fillStyle = "blue";
+                    ctx.fill();
+                    ctx.strokeStyle = "blue";
+                    ctx.stroke();
+                    ctx.closePath();
                 }
 
 
@@ -63,24 +71,31 @@
                 }
 
 
-                // 9.2.2 create the animation using requestAnimationFrame & it will run for 3s, then stop
+                // 9.2.2 create the animation using requestAnimationFrame & it will run for 3s, then stop (Callbackfunction)
                 function animate(timestamp) {
                     if (!startTime) startTime = timestamp;
                     const elapsed = timestamp - startTime;
+                    
+                    // updatePosition();
+                    // applyBouncing();
+                    // drawBall();
 
                     // Run for 3 seconds, then stop
                     if (elapsed < 3000) {
-              
-
+                    updatePosition(); // von oben
+                    applyBouncing();  // von oben
+                    drawBall();  // von oben
+                        animationId = requestAnimationFrame(animate);
 
                     } else {
                         // End animation
-                    
+                    cancelAnimationFrame(animationId)
+                    jsPsych.finishTrial(); // alles geht am Schluss weg -> weisse Seite
                     }
                 }
 
                 // Start the animation
-            
+                animationId = requestAnimationFrame(animate);
 
             }
         };
