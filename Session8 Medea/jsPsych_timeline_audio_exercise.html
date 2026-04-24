@@ -26,6 +26,7 @@
 
     /* initialize jsPsych */
     const jsPsych = initJsPsych({
+      // storage data for later analysis (csv or json)
       on_finish: () => {
       jsPsych.data.get().localSave('csv','verbal_fluency_data.csv');}
       });
@@ -82,6 +83,7 @@
 
     timeline.push(record);
 
+    // access and manipulate recorded data 
     const endMessage = {
       type: jsPsychHtmlButtonResponse,
       stimulus: () => {

@@ -23,12 +23,8 @@
 
       /* 9.1.2 */
       // use getElementById() & . textContent to achieve the same goal as in the starting example
-
-      document.getElementbyId("my-heading").textContent += ": Hello, DOM!"
-      document.getElementbyId("welcome").textContent += "Medea";
-
-
-      
+      document.getElementById("my-heading").textContent += ": Hello, DOM!"
+      document.getElementById("welcome").textContent += "Medea";      
     </script>
 
     <script>
@@ -60,6 +56,7 @@
                 }, 1000);
             }
           };
+         
           timeline.push(countdown);
 
           const progress_duration = 2000
